@@ -51,11 +51,26 @@ show create table <tablename>\G //show with format
 create table <tablename> as select * from <tablename2> where 1=2; //copy table structure. table content will be copied too without where
 
 create table <tablename> like <tablename2>
-
-
-
-
 ```
 
+### table maintain
+```
+rename table <old name> to <new name>;
 
+alter table add <column> <type> comment <comment>;
+
+alter table add <column> <type> comment <comment> first;
+alter table add <column> <type> comment <comment> after <column>;
+
+alter table <tablename> modify <column> <new type>;
+
+alter table <tablename> change <old column name> <new column name> <type>;
+
+alter table <tablename> dope <column name>;
+
+alter table <tablename> character set <character set>;
+
+drop table <tablename>;
+drop table if exists <tablename>;
+```
 
