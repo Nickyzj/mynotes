@@ -22,6 +22,7 @@ mysql -u<username> -p<password>
 ```
 create database <database name>
 show databases;
+show tables;
 select database(); //show current database name
 use <database>;
 
@@ -34,6 +35,27 @@ show create database <database>; //use default character set in /etc/my.cnf
 show variables like 'character%';
 ```
 
+### create table
+
+```
+create table <tablename> (
+  <fieldname> <type> <constrain> <comment>,
+  <fieldname> <type> <constrain> <comment>
+)
+
+desc <tablename>;
+
+show create table <tablename>; //create table sql
+show create table <tablename>\G //show with format
+
+create table <tablename> as select * from <tablename2> where 1=2; //copy table structure. table content will be copied too without where
+
+create table <tablename> like <tablename2>
+
+
+
+
+```
 
 
 
