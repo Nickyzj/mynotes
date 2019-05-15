@@ -14,6 +14,25 @@ ln -s /usr/local/mysql/bin/* /bin
 
 cd /etc
 lr -lrt | grep my.cnf
+
+mysql -u<username> -p<password>
 ```
 
-###
+### Create database
+```
+create database <database name>
+show databases;
+select database(); //show current database name
+use <database>;
+
+create database if not exists <database>;
+
+create database <database> default character set gbk;
+
+show create database <database>; //use default character set in /etc/my.cnf
+
+show variables like 'character%';
+```
+
+
+
