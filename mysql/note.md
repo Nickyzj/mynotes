@@ -133,6 +133,20 @@ max()
 select * from <tablename> where <columnname> = seclect max(<columnname>) from <tablename>; //find the max record.
 avg()
 min()
+
+select concat(<columnname1>, <columname2>) from <tablename>; //concat multile string
 ```
 
+### group
+```
+查询每个部门有多少员工
+select deptnumber, count(*) from employee group by deptnumber; 
+select deptnumber, job, count(*) from employee group by deptnumber, job; //显示几个列，group by 也要加几个列
+```
 
+### having
+```
+select job, count(*) from employee group by job having job='文员'; //对结果筛选
+select deptnubmer, job, count(*) as '总数' from employee group by deptnumber, job having coung(*)>2; //对 count(*)筛选 
+
+```
