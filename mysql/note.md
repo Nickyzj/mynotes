@@ -191,8 +191,9 @@ union all //不去重
 ```
 
 ### 实战
-```
+
 1. 查出至少有一个员工的部门。显示部门编号，部门名称，部门位置，部门人数
+```
 select deptnum, count(*) from employee group by deptnum;
 select  d.num,
         d.name,
