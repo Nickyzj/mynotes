@@ -189,3 +189,77 @@ inner join <tablename> on <condition> //获取两个表中字段相匹配的内�
 select * from employee e where e.job=<value1> union select * from employee e where e.job=<value2>; 
 union all //不去重
 ```
+
+### 实战
+```
+1. 查出至少有一个员工的部门。显示部门编号，部门名称，部门位置，部门人数
+select deptnum, count(*) from employee group by deptnum;
+select  d.num,
+        d.name,
+        d.addr, 
+        e.total 
+        from 
+        dept d,
+        (select deptnum, count(*) as total from employee group by deptnum) e 
+        where d.deptnum=e.deptnum;
+                        
+2. 列出薪金比安其拉高的所有员工
+select * from employee where sal > (
+      select sal from employee where ename='安其拉'
+      )
+
+3. 列出所有员工姓名及其直接上级的姓名
+select a.ename, ifnull(b.eanme, 'boss') as leader from employee a left join employee b where a.mgr=b.empno;
+
+
+4. 列出受雇日期早于直接上级的所有员工的编号，姓名，部门名称
+
+select a.ename, a.eanme, c.dname from employee a left join employee b where a.mgr=b.empno left join dept c on a.deptnu=c.deptnu where a.hiredate < b.hiredate
+```
+
+5. 列出部门名称和这些部门的员工信息。同时列出那些没有员工的部门
+```
+select d.name,e.* from dept d left join employee e where d.deptnumber=e.deptnumber
+```
+
+6. 列出所有文员的姓名及其部门名称，所在部门的总人数
+```
+employee dept
+
+select e.name, d.dname, c.zongshu from employee e, dept d, (select deptnum, count(*) as zongshu from employee group by deptnum) c 
+where e.job='wenyuan' and e.deptnum = d.deptnum and e.deptnum = c.deptnum
+```
+
+7. 列出最低薪金大于15000的各种工作及从事此工作的员工人数
+```
+select job, count(*) from employee group by job having min(sal) > 15000;
+```
+
+8. 列出在销售部工作的员工的姓名，假定不知道销售部的部门编号
+```
+select ename from employee where deptnum = (select deptnum from dept where dname='销售部')
+```
+
+9. 列出诸葛亮从事相同工作的所有员工及部门名称
+```
+select deptnum from employee where name='诸葛亮'
+select e.*, d.dname from employee e, dept d where e.deptnum = (select deptnum from employee where name='诸葛亮')
+```
+
+10. 列出薪金比在部门30的员工的薪金还高的员工姓名和薪金，部门名称
+```
+select max(sal) from employee where deptnum='30'
+select e.name, e.sal, d.dname from employee e, dept d where e.sal > (select max(sal) from employee where deptnum='30') and e.deptno = d.deptno
+```
+
+11. 列出每个部门的员工数量，平均工资
+```
+select deptnu, count(*), avg(sal) from employee group by deptnum
+```
+
+12. 列出薪金高于公司平均薪金的所有员工信息，所在部门名称，上级领导，工资等级
+```
+select avg(sal) from employee
+
+select e1.*, d.name, e2.name, s.grade from employee e1, employee e2, dept d, salgrade s where e1.mgr = e2.empno and e1.deptnum = d.deptnum and e1.sal between s.lowsal and s.highsal and a.sal > (select avg(sal) from employee)
+```
