@@ -39,8 +39,8 @@ show variables like 'character%';
 
 ```
 create table <tablename> (
-  <fieldname> <type> <constrain> <comment>,
-  <fieldname> <type> <constrain> <comment>
+  <fieldname> <type> <constrain> comment <comment>,
+  <fieldname> <type> <constrain> comment <comment>
 )
 
 desc <tablename>;
@@ -74,3 +74,16 @@ drop table <tablename>;
 drop table if exists <tablename>;
 ```
 
+### DML
+```
+insert into <tablename> (<fieldname>) values (<value>);
+insert into <tablename> values (<all values>);
+
+insert into <tablename1> select * from <tablename2>;
+insert into <tablename1> (<columnname1>, <columnname2>) select <columnname1>, <columnname2> from <tablename2>;
+
+create table <tablename1> as select <columnname1>, <columnname2> from <tablename2>;
+
+insert into <tablename> (<columnname>) values (<value1>), (<value2>), (<value3>);
+
+```
