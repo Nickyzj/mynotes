@@ -202,18 +202,20 @@ select  d.num,
         dept d,
         (select deptnum, count(*) as total from employee group by deptnum) e 
         where d.deptnum=e.deptnum;
-                        
+```                   
 2. 列出薪金比安其拉高的所有员工
+```
 select * from employee where sal > (
       select sal from employee where ename='安其拉'
       )
-
+```
 3. 列出所有员工姓名及其直接上级的姓名
+```
 select a.ename, ifnull(b.eanme, 'boss') as leader from employee a left join employee b where a.mgr=b.empno;
 
-
+```
 4. 列出受雇日期早于直接上级的所有员工的编号，姓名，部门名称
-
+```
 select a.ename, a.eanme, c.dname from employee a left join employee b where a.mgr=b.empno left join dept c on a.deptnu=c.deptnu where a.hiredate < b.hiredate
 ```
 
