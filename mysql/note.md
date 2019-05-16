@@ -178,3 +178,14 @@ right join <tablename> on <condition> /right outer <tablename> join on <conditio
 select d.dname, d.addr, e.* from dept d left join employee e on d.detpnumber = e.deptnumber
 ```
 
+### inner join
+```
+inner join <tablename> on <condition> //获取两个表中字段相匹配的内容
+```
+
+### union
+```
+把多个查询结果拼成一张表。字段数必须一致。去重。
+select * from employee e where e.job=<value1> union select * from employee e where e.job=<value2>; 
+union all //不去重
+```
