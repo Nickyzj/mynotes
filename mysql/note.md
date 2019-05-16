@@ -86,4 +86,43 @@ create table <tablename1> as select <columnname1>, <columnname2> from <tablename
 
 insert into <tablename> (<columnname>) values (<value1>), (<value2>), (<value3>);
 
+update <tablename> set <coloumnname>=<value>, <columnname2>=<value2> where <columnname>=<value>;
+
+delete from <tablename> where <columnname>=<value>;
+delete from table <tablename>; //auto-increment will continue. 数据可以回退，不会释放空间，不会删除定义(auto increment)
+
+truncate <tablename>; //auto-increment will be reset. 删除后不可恢复。会把表占用的空间恢复到最初。
+
+drop table <tablename>; //删除整张表，释放所有空间。
+
+删除速度
+drop > truncate > delete
+
+查看当前 mysql 使用的字符集
+show variables like 'character%';
+
+解决乱码问题
+临时方法：
+外部显示  set names gbk;
+永久方法：
+/etc/my.cnf
+default-character-set=utf8
+service mysql restart
+
+库字符集：
+[mysqld]
+character_set_server=utf8
+
+alter database <databasename> default charactere set gbk;
+
+
+
+
+
+
+
+
+
+
+
 ```
