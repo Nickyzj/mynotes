@@ -114,15 +114,25 @@ service mysql restart
 character_set_server=utf8
 
 alter database <databasename> default charactere set gbk;
-
-
-
-
-
-
-
-
-
-
-
 ```
+
+### where
+```
+not equal != <>
+like 'xxxx%'
+between 1000 and 3000
+select * from <tablename> where <columnname> in ('', '','');
+select distinct(<columnname>) from <tablename>;
+
+count(<columnname>) or count(*)
+select count(*) from <tablename>;
+
+sum(<columnname>)
+select sum(<columnname>) from <tablename>;
+max()
+select * from <tablename> where <columnname> = seclect max(<columnname>) from <tablename>; //find the max record.
+avg()
+min()
+```
+
+
