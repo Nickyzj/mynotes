@@ -150,3 +150,31 @@ select job, count(*) from employee group by job having job='文员'; //对结果
 select deptnubmer, job, count(*) as '总数' from employee group by deptnumber, job having coung(*)>2; //对 count(*)筛选 
 
 ```
+
+### order by
+```
+order by asc //default
+order by desc
+```
+
+### limit
+```
+limit n, m //n 代表起始行数，默认为0，m 代表取出条数
+```
+
+### exists
+```
+select * from <tablename> t1 where exists(select 1 from <tablename2> where <condition>); // exists 中查询有结果则为 True
+查询公司有员工的部门的详细信息
+select * from dept d where exists (select 1 from employee e where d.deptnumber=e.deptnumber);
+select * from dept d where not exists (select 1 from employee e where d.deptnumber=e.deptnumber); //没有员工的部门
+```
+
+### left join right join (外连接）
+```
+left join <tablename> on <condition> /left outer <tablename> join on <condition> //以左表为基准，左表内容都会显示，右表无内容则显示 NULL
+right join <tablename> on <condition> /right outer <tablename> join on <condition>
+
+select d.dname, d.addr, e.* from dept d left join employee e on d.detpnumber = e.deptnumber
+```
+
