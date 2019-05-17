@@ -266,3 +266,8 @@ select avg(sal) from employee
 
 select e1.*, d.name, e2.name, s.grade from employee e1, employee e2, dept d, salgrade s where e1.mgr = e2.empno and e1.deptnum = d.deptnum and e1.sal between s.lowsal and s.highsal and a.sal > (select avg(sal) from employee)
 ```
+
+### DCL
+
+#### mysql 限制root用户指定ip登陆
+
