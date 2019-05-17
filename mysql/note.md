@@ -270,4 +270,150 @@ select e1.*, d.name, e2.name, s.grade from employee e1, employee e2, dept d, sal
 ### DCL
 
 #### mysql 限制root用户指定ip登陆
+```
+use mysql;
+show tables;
+user 表
+host % 代表任何机器
+select user,host from user='root'
+mysql -uroot -hlocalhost -p //本机登陆
+mysql -uroot -h<ip addr> -p
+
+update user set host='localhost' where user='root';
+flush privileges;
+
+```
+
+#### 用户密码
+```
+1.
+set password for <user>@<ip> = password('<password>');
+set password for root@localhost = password('sss');
+2.
+mysqladmin -u<user -p<old password> -p <new password>;
+3.
+select * from mysql.user where user='root'
+authentication_string //密码
+update mysql.user set authentication_string='password('xxx') where user='<user>';
+
+select user,host from mysql.user where user='root'; //maybe multiple records for different machine login
+
+忘记密码
+1.
+/etc/my.cnf
+[mysqld]
+skip-grant-tables //跳过权限
+2.
+service mysql restart
+3.
+mysql -uroot -p
+不用输密码直接回车
+4.
+修改密码
+5.
+#skip-grant-tables
+```
+
+#### 创建新用户 并限制ip网段登陆
+```
+create user '<username>'@'<host>' identified by '<pasword>';
+% host通配符
+show grants for '<username>'@'<host>';
+USAGE 表示无权限
+WITH GRANT OPTION 表示拥有grant权限
+
+create user '<username>'@'120.%.%.%' identified by '<password>';
+```
+
+#### 删除用户
+```
+drop user '<username>'@'<host>';
+delete from mysql.user where user='<username>';
+
+```
+
+#### 库 表 权限授权与回收
+```
+grant <privilege1>,<privilege2>,... on <object> to '<username>';
+grant <privilege1>,<privilege2>,... on <database>.<table> to '<username>'@'<host>' identified by '<password>';
+grant all privileges 所有权限
+*.* 所有库所有表
+flush privileges;
+
+
+revoke <privilege1>,<privilege2>,... on <object> from '<username>'@'<host>'
+```
+
+### 事务
+```
+事务开启 bgin; 或start transaction; 老版本
+事务提交 commit; 之后语句才执行（写入磁盘）
+事务回滚 rollback;
+
+show variables like 'autocommit';
+如果为 ON 则自动提交
+set autocommit=0 (临时生效）
+修改/etc/my.cnf (永久生效)
+autocommit=1
+service mysql restart
+
+show engines; //查看引擎
+alter table <table> engine='<engine name>';
+show create table <tablename>\G
+```
+
+### 视图
+```
+create view <viewname> as select <sql>;
+create view <viewname> (column) as select <sql>;
+create or replace view <viewname>;
+
+show create view <viewname>;
+
+alter view <viewname> as select <sql>;
+
+drop view <viewname>;
+
+```
+
+### 触发器
+```
+create trigger <triggername> after/before insert/update/delete on <tablename>
+for each row
+begin;
+<sql>
+end;
+
+drop tigger <triggername>
+
+delimiter <sign> //自定义结束符号
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
