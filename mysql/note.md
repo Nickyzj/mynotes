@@ -1,4 +1,5 @@
 ### Add mysql to service
+
 ```
 ps -ef | grep mysql
 cp -a mysql.server /etc/rc.d/init.d/mysql
@@ -19,6 +20,7 @@ mysql -u<username> -p<password>
 ```
 
 ### Create database
+
 ```
 create database <database name>
 show databases;
@@ -54,6 +56,7 @@ create table <tablename> like <tablename2>
 ```
 
 ### table maintain
+
 ```
 rename table <old name> to <new name>;
 
@@ -75,6 +78,7 @@ drop table if exists <tablename>;
 ```
 
 ### DML
+
 ```
 insert into <tablename> (<fieldname>) values (<value>);
 insert into <tablename> values (<all values>);
@@ -117,6 +121,7 @@ alter database <databasename> default charactere set gbk;
 ```
 
 ### where
+
 ```
 not equal != <>
 like 'xxxx%'
@@ -138,6 +143,7 @@ select concat(<columnname1>, <columname2>) from <tablename>; //concat multile st
 ```
 
 ### group
+
 ```
 查询每个部门有多少员工
 select deptnumber, count(*) from employee group by deptnumber; 
@@ -145,6 +151,7 @@ select deptnumber, job, count(*) from employee group by deptnumber, job; //显�
 ```
 
 ### having
+
 ```
 select job, count(*) from employee group by job having job='文员'; //对结果筛选
 select deptnubmer, job, count(*) as '总数' from employee group by deptnumber, job having coung(*)>2; //对 count(*)筛选 
@@ -152,17 +159,20 @@ select deptnubmer, job, count(*) as '总数' from employee group by deptnumber, 
 ```
 
 ### order by
+
 ```
 order by asc //default
 order by desc
 ```
 
 ### limit
+
 ```
 limit n, m //n 代表起始行数，默认为0，m 代表取出条数
 ```
 
 ### exists
+
 ```
 select * from <tablename> t1 where exists(select 1 from <tablename2> where <condition>); // exists 中查询有结果则为 True
 查询公司有员工的部门的详细信息
@@ -171,6 +181,7 @@ select * from dept d where not exists (select 1 from employee e where d.deptnumb
 ```
 
 ### left join right join (外连接）
+
 ```
 left join <tablename> on <condition> /left outer <tablename> join on <condition> //以左表为基准，左表内容都会显示，右表无内容则显示 NULL
 right join <tablename> on <condition> /right outer <tablename> join on <condition>
@@ -179,11 +190,13 @@ select d.dname, d.addr, e.* from dept d left join employee e on d.detpnumber = e
 ```
 
 ### inner join
+
 ```
 inner join <tablename> on <condition> //获取两个表中字段相匹配的内容
 ```
 
 ### union
+
 ```
 把多个查询结果拼成一张表。字段数必须一致。去重。
 select * from employee e where e.job=<value1> union select * from employee e where e.job=<value2>; 
@@ -193,6 +206,7 @@ union all //不去重
 ### 实战
 
 1. 查出至少有一个员工的部门。显示部门编号，部门名称，部门位置，部门人数
+
 ```
 select deptnum, count(*) from employee group by deptnum;
 select  d.num,
@@ -203,29 +217,37 @@ select  d.num,
         dept d,
         (select deptnum, count(*) as total from employee group by deptnum) e 
         where d.deptnum=e.deptnum;
-```                   
+```
+
 2. 列出薪金比安其拉高的所有员工
+
 ```
 select * from employee where sal > (
       select sal from employee where ename='安其拉'
       )
 ```
+
 3. 列出所有员工姓名及其直接上级的姓名
+
 ```
 select a.ename, ifnull(b.eanme, 'boss') as leader from employee a left join employee b where a.mgr=b.empno;
 
 ```
+
 4. 列出受雇日期早于直接上级的所有员工的编号，姓名，部门名称
+
 ```
 select a.ename, a.eanme, c.dname from employee a left join employee b where a.mgr=b.empno left join dept c on a.deptnu=c.deptnu where a.hiredate < b.hiredate
 ```
 
 5. 列出部门名称和这些部门的员工信息。同时列出那些没有员工的部门
+
 ```
 select d.name,e.* from dept d left join employee e where d.deptnumber=e.deptnumber
 ```
 
 6. 列出所有文员的姓名及其部门名称，所在部门的总人数
+
 ```
 employee dept
 
@@ -234,33 +256,39 @@ where e.job='wenyuan' and e.deptnum = d.deptnum and e.deptnum = c.deptnum
 ```
 
 7. 列出最低薪金大于15000的各种工作及从事此工作的员工人数
+
 ```
 select job, count(*) from employee group by job having min(sal) > 15000;
 ```
 
 8. 列出在销售部工作的员工的姓名，假定不知道销售部的部门编号
+
 ```
 select ename from employee where deptnum = (select deptnum from dept where dname='销售部')
 ```
 
 9. 列出诸葛亮从事相同工作的所有员工及部门名称
+
 ```
 select deptnum from employee where name='诸葛亮'
 select e.*, d.dname from employee e, dept d where e.deptnum = (select deptnum from employee where name='诸葛亮')
 ```
 
 10. 列出薪金比在部门30的员工的薪金还高的员工姓名和薪金，部门名称
+
 ```
 select max(sal) from employee where deptnum='30'
 select e.name, e.sal, d.dname from employee e, dept d where e.sal > (select max(sal) from employee where deptnum='30') and e.deptno = d.deptno
 ```
 
 11. 列出每个部门的员工数量，平均工资
+
 ```
 select deptnu, count(*), avg(sal) from employee group by deptnum
 ```
 
 12. 列出薪金高于公司平均薪金的所有员工信息，所在部门名称，上级领导，工资等级
+
 ```
 select avg(sal) from employee
 
@@ -270,6 +298,7 @@ select e1.*, d.name, e2.name, s.grade from employee e1, employee e2, dept d, sal
 ### DCL
 
 #### mysql 限制root用户指定ip登陆
+
 ```
 use mysql;
 show tables;
@@ -285,6 +314,7 @@ flush privileges;
 ```
 
 #### 用户密码
+
 ```
 1.
 set password for <user>@<ip> = password('<password>');
@@ -315,6 +345,7 @@ mysql -uroot -p
 ```
 
 #### 创建新用户 并限制ip网段登陆
+
 ```
 create user '<username>'@'<host>' identified by '<pasword>';
 % host通配符
@@ -326,6 +357,7 @@ create user '<username>'@'120.%.%.%' identified by '<password>';
 ```
 
 #### 删除用户
+
 ```
 drop user '<username>'@'<host>';
 delete from mysql.user where user='<username>';
@@ -333,6 +365,7 @@ delete from mysql.user where user='<username>';
 ```
 
 #### 库 表 权限授权与回收
+
 ```
 grant <privilege1>,<privilege2>,... on <object> to '<username>';
 grant <privilege1>,<privilege2>,... on <database>.<table> to '<username>'@'<host>' identified by '<password>';
@@ -345,6 +378,7 @@ revoke <privilege1>,<privilege2>,... on <object> from '<username>'@'<host>'
 ```
 
 ### 事务
+
 ```
 事务开启 bgin; 或start transaction; 老版本
 事务提交 commit; 之后语句才执行（写入磁盘）
@@ -363,6 +397,7 @@ show create table <tablename>\G
 ```
 
 ### 视图
+
 ```
 create view <viewname> as select <sql>;
 create view <viewname> (column) as select <sql>;
@@ -377,6 +412,7 @@ drop view <viewname>;
 ```
 
 ### 触发器
+
 ```
 create trigger <triggername> after/before insert/update/delete on <tablename>
 for each row
@@ -390,30 +426,114 @@ delimiter <sign> //自定义结束符号
 
 ```
 
+### Engine and Index
+
+```
+select version(); //数据库版本
+show engines;
+show table status\G //查看当前库所有表的引擎
+
+alter table <tablename> engine='MyISAM';
+
+/etc/my.cnf
+[mysqld]
+default-storage-engine=MyISAM
+
+MyISAM 不支持事务，支持全文索引，表级锁，保存表的具体行数，奔溃修复不好
+Innodb 支持事务，5.7后支持全文索引，行级锁，不保存表的具体行数，奔溃恢复好
+
+show index from <tablename>\G
+
+```
+
+#### 全文索引
+
+```
+alter table <tablename> add fulltext (<columnname>);
+
+select * from <tablename> where match <columnname> against('<text>');
+
+匹配度
+select id,match(<columnname>) against('<text>') from <tablename>;
+
+select * from <tablename> where match(<columnname>) against('<text>*' in boolean mode);
+通配符只能放在后面
+
+select * from <tablename> where match(<columnname>) against('+<text> + <text2>' in boolean mode);
++ 必须出现
+空格 代表 或
+- 不能出现
+```
+
+#### 外键
+
+```
+foreign key <columnname> references <tablename>(<columnname>);
+
+alter table <tablename> add foreign key (<columnname>) references <tablename>(<columnname>);
+
+alter table <tablename> drop foreign key '<keyname>';
+alter table <tablename> drop index '<columnname>';
+先删掉外键约束，才能删除外键索引
+主键和外键字段类型要相同
+必须InnoDB引擎
+```
+
+#### 联合索引
+
+```
+alter table <tablename> add index(<col1>, <col2>, <col3>);
+
+alter table <tablename> drop index <col>;
+
+explain <sql> 解释sql
+
+当有多列索引的时候，mysql会选择效率最高的一个
+
+以最左的字段为基础，如果查询条件不包含，则不使用索引
+```
+
+### SQL语句优化
+
+```shell
+show variables like '%slow%';
+
+set global slow_query_log = on;
+
+show variables like '%long%';
+
+set long_query_time = <seconds>;
+
+查看log file
+query_time
+lock_time
+rows_sent
+rows_examined
+
+/etc/my.cnf
+[mysqld]
+slow_query_log=1
+long_query_time=0.1
+slow_query_log_file=<file path>
+
+show variables like '%profiling%';
+
+set profiling = on;
+
+show profiles;
+
+show profile cpu,block io for query <number>; 
+
+show profile for query <number>; //数据库执行的每一步
 
 
+```
 
+#### 提升效率
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- 避免 select *。指定字段
+- 避免使用or
+- 使用limit
+- 模糊查询%放在开始，索引失效
+- 加引号是字符型，不加是int型，会做类型转换，类型不匹配会使索引失效
+- 
