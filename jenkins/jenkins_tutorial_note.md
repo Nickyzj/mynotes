@@ -57,3 +57,6 @@ Manage Jenkins - Configuration - Home Directory
 * role strategy plugin
 * 系统管理 - manage and asign roles
 
+### Triger build from URL
+
+`<http://localhost:8080/job/Test1/build?token=1234>`
