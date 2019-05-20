@@ -51,3 +51,9 @@ Manage Jenkins - Configuration - Home Directory
 * id_rsa: admin - configuration - SSH Public Keys
 * `java -jar jenkins-cli.jar -s http://localhost:8080/ <command> --username <username> --password <password>`
 
+## Tutorial 5 - Manage User
+
+* 系统管理 - 管理用户
+* role strategy plugin
+* 系统管理 - manage and asign roles
+
