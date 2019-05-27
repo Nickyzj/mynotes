@@ -150,6 +150,12 @@ tar -zxvf <file>
 
 `jmeter -n -t <path/file.jmx> -l <path/result.jtl> -e -o <result path>`
 
+`sh jmeter.sh -Jjmeter.save.saveservice.output_format=xml -n -t <path/result.jmx> -l <path/result.jtl>`
+
+```
+C:\Tools\apache-jmeter-5.0\bin\jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t C:\Users\nzheng\.jenkins\workspace\jmeter\script\test_plan.jmx -l C:\Users\nzheng\.jenkins\workspace\jmeter\result\result.jtl -e -o C:\Users\nzheng\.jenkins\workspace\jmeter\result
+```
+
 
 
 ## 总结
