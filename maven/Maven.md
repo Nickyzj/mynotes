@@ -41,7 +41,7 @@
 
 3. Maven clean build
 
-   [[How to clean or clean build my Maven project in IntelliJ IDEA?](https://stackoverflow.com/questions/35409788/how-to-clean-or-clean-build-my-maven-project-in-intellij-idea)](https://stackoverflow.com/questions/35409788/how-to-clean-or-clean-build-my-maven-project-in-intellij-idea/35442639)
+   [How to clean or clean build my Maven project in IntelliJ IDEA?](https://stackoverflow.com/questions/35409788/how-to-clean-or-clean-build-my-maven-project-in-intellij-idea/35442639)
 
 4. code 
 
