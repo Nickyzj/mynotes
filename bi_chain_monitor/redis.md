@@ -5,6 +5,10 @@ pip install rq
 pip freeze > requirements.txt
 ```
 
+
+
+[Redis Windows Download](<https://github.com/MicrosoftArchive/redis/releases>)
+
 start redis server `redis-server`
 
 Running the RQ Worker
@@ -33,9 +37,18 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 
 [Windows 上 Python 开发环境搭建](<http://www.zmonster.me/2016/09/10/use-python-on-windows.html>)
 
+```
+lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg
+install apt-cyg /bin
+
+apt-cyg install wget vim gcc-core tmux sl
+
+python -m ensurepip
+python3 -m ensurepip
+```
+
 `cd /cygdrive/c`
 
 `source activate`
 
 `deactivate`
-
