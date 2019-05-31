@@ -22,3 +22,5 @@ rabbitmqctl change_password nicky 123
 
 [RabbitMQ console](<http://localhost:15672/>)
 
+nicky/123
+
