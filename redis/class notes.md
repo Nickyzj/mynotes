@@ -84,6 +84,12 @@ delete /var/run/redis.pid file and restart the server again.
 
 # Redis data type
 
+设置隔离级别
+
+```sql
+set global transaction isolation level repeatable read;
+```
+
 
 
 

@@ -39,5 +39,41 @@
 
 #### Background
 
-Monitor data loading, extraction process in web UI. Fix exception by sending RFC to SAP manually and automatically. Log user activity.
+Ops team monitor data loading, extraction process for multiple BW systems 24x7. It takes long time for them to identify issue in SAP GUI, take fix actions or report issue to bw team to fix.
+
+#### Highlights
+
+Built a monitor system using Python Flask, Bootstrap, Ajax, Redis.
+
+Monitor multiple systems in one place.
+
+Fix issues in asynchronous queue for long processing actions. Manually and automatic (by rules).
+
+Log users' activities.
+
+Use Jenkins, python xmlrunner and selenium to monitor system stability.
+
+### Content Decryption Server
+
+#### Background
+
+Content needs to decrypt, parameterize and encrypt in a performance testing. Loadrunner has limitation to fulfill.
+
+#### Highlights
+
+Built a Node.js server as a middleware using Express framework.
+
+Handle requests asynchronously. 
+
+Replace paramaters by rules of regular expression. 
+
+### Avnet Performance Center
+
+#### Background
+
+Need a tool to replace ALM (QC) as a light-weight project management system for performance test project only.
+
+#### Highlights
+
+Build a Python Django
 
