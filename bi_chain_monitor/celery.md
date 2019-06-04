@@ -102,4 +102,3 @@ task = my_background_task.apply_async(args=[10, 20], countdown=60)
 [python之celery使用详解(二)](https://www.cnblogs.com/cwp-bg/p/10575688.html)
 
 [celery 爬坑](<https://www.laoyuyu.me/2018/02/10/python_flask_celery/>)
-
