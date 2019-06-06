@@ -1,6 +1,6 @@
-# Interview Questions
+# [Interview Questions](https://www.youtube.com/channel/UCM5ldu3IonPjffpYSnSYYJA/videos)
 
-## IQ15 - 6 SQL Query Interview Questions
+## [IQ15 - 6 SQL Query Interview Questions](https://www.youtube.com/watch?v=uAWWhEA57bE&t=835s)
 
 1. Return employee record with highest salary
 
