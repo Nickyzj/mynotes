@@ -11,7 +11,7 @@
 
 1. Automation Test
 
-   Python selenium, Java JUnit, QuickTest Pro
+   Python selenium, Java JUnit, Maven, UFT
 
 2. Performance Test
 
