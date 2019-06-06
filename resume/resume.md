@@ -15,7 +15,7 @@
 
 2. Performance Test
 
-   Loadrunner/Performance Center, Jmeter, Fiddler
+   Loadrunner, Jmeter, Fiddler
 
 3. CI
 
@@ -43,7 +43,7 @@ Ops team monitor data loading, extraction process for multiple BW systems 24x7. 
 
 #### Highlights
 
-Built a monitor system using Python Flask, Bootstrap, Ajax, Redis.
+Built a monitor system using Python Flask, Bootstrap, Ajax, Redis, Json.
 
 Monitor multiple systems in one place.
 
@@ -57,23 +57,56 @@ Use Jenkins, python xmlrunner and selenium to monitor system stability.
 
 #### Background
 
-Content needs to decrypt, parameterize and encrypt in a performance testing. Loadrunner has limitation to fulfill.
+Content needs to decrypt, parameterize and encrypt for performance testing. Loadrunner has limitation to fulfill.
 
 #### Highlights
 
 Built a Node.js server as a middleware using Express framework.
 
-Handle requests asynchronously. 
+Handle requests asynchronously (Node.js Non block IO).
 
 Replace paramaters by rules of regular expression. 
 
-### Avnet Performance Center
+### Connection Channel App Automation Test
 
 #### Background
 
-Need a tool to replace ALM (QC) as a light-weight project management system for performance test project only.
+Need to setup automation test for CC app for bi-weekly releases.
 
 #### Highlights
 
-Build a Python Django
+Setup test environment for both IOS and Android.
 
+Built up end-to-end test scripts in UFT.
+
+### SAP BPC Performance Test
+
+#### Backgound
+
+SAP BPC is Excel-Addin application. Multiple  requests/responses in single step. Complex parameters setup.
+
+#### Highlights
+
+Use Fiddler to capture Http requests/responses. Convert to Loadrunner scripts.
+
+Get batch job process times in separate python scripts. Data Cleaning. Generate Report.
+
+### SAP ECC Performance Test
+
+sap monitor. deep understanding of business processes.
+
+### Team Management
+
+team member skill development
+
+### MySQL Tunning
+
+### Sorting Algorithm
+
+#### Quick Sort
+
+#### Merge Sort
+
+### Automation Test Framework
+
+setup automation test framework based on Jenkins, Git, Jmeter, Selenium, JUnit.
