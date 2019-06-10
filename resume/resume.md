@@ -9,29 +9,35 @@
 
 ## Strengths
 
-1. Automation Test
+1. Developing test automation strategy and frameworks
 
-   Python selenium, Java JUnit, Maven, UFT
+   Selenium, JUnit, Maven, UFT
 
-2. Performance Test
+2. Performance test strategy
 
    Loadrunner, Jmeter, Fiddler
 
-3. CI
+3. Test management, test requirements, test plan
+
+   Quality Center
+
+4. Continuous Integration, Continuous Delivery and Continuous Deployment
 
    Jenkins, Git
 
-4. Web Application
+5. Web Application Development
 
    Python (Flask, Django), Java (Springboot), Javascript (Nodejs, Express)
 
-5. Database
+6. Database
 
    Mysql, MongoDB, Redis, SQLite
 
-6. OS
+7. OS
 
    Windows, Linux (Ubuntu, CentOS)
+
+8. Mentor, technology and skill sharing
 
 ## Projects
 
