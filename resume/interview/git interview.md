@@ -22,5 +22,5 @@ git status
 touch .gitignore
 ```
 
-![1560219102064](..\images\1560219102064.png)
+![1560219102064](<https://raw.githubusercontent.com/Nickyzj/mynotes/master/resume/images/1560219102064.png>)
 
