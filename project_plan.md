@@ -24,20 +24,21 @@
 1. python
 2. java
 3. javascript
-4. go
-5. springMVC
-6. Linux
-7. mysql/postgresql
-8. sql
-9. jenkins
-10. docker
-11. Git
-12. jira/bugzilla/clearquest
-13. TCP, HTTP
-14. fiddler/charles
-15. linux bash shell
-16. apache/tomcat performance tuning
-17. distributed system, multi-thread and high performance design and performance tuning
-18. automation in Selenium 
-19. Familiar with automation test frameworks such as Robot Framework.
-20. Experience with software development/testing tools such as Jenkins, Git/GitHub, Gradle, Cucumber, JIRA, Testlink, Qtest etc.
+4. react
+5. go
+6. springMVC
+7. Linux
+8. mysql/postgresql
+9. sql
+10. jenkins
+11. docker
+12. Git
+13. jira/bugzilla/clearquest
+14. TCP, HTTP
+15. fiddler/charles
+16. linux bash shell
+17. apache/tomcat performance tuning
+18. distributed system, multi-thread and high performance design and performance tuning
+19. automation in Selenium 
+20. Familiar with automation test frameworks such as Robot Framework.
+21. Experience with software development/testing tools such as Jenkins, Git/GitHub, Gradle, Cucumber, JIRA, Testlink, Qtest etc.
