@@ -74,3 +74,5 @@ docker login
 
 ```
 
+[error during connect](<https://github.com/docker/for-win/issues/1825>)
+
