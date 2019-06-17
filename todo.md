@@ -2,3 +2,5 @@
 
 [给你一份Spring Boot知识清单](<https://zhuanlan.zhihu.com/p/65409521>)
 
+[Selenium Hybrid Automation Framework Part-1](https://www.youtube.com/watch?v=M4Ye3SKT46g)
+
