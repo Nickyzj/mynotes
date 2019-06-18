@@ -22,3 +22,4 @@
 Hashmap allows null key, which always goes to index 0 as hash of null is 0
 
 Java8, 当不同 key 相同 hashcode 超过 TREEIFY_THRESHOLD = 8 时，该分支从 linked list 转为 balanced tree。O(n) -> O(log n)
+

@@ -37,3 +37,7 @@
 
 ## java.util.EnumMap
 
+## java.util.WeakHashMap
+
+## java.util.concurrent.ConcurrentHashMap
+
