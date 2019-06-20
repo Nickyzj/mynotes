@@ -14,3 +14,7 @@ balanced tree
 
 [Oh shit, git!](https://ohshitgit.com/)
 
+[Tech Dummies - Narendra L](https://www.youtube.com/channel/UCn1XnDWhsLS5URXTi5wtFTA)
+
+[Computerphile](https://www.youtube.com/channel/UC9-y-6csu5WGm29I7JiwpnA)
+
