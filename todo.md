@@ -12,3 +12,5 @@ balanced tree
 
 [Ranjith ramachandran](https://www.youtube.com/channel/UCVPASNJQ98XbpQM8Oy3qZJg/videos)
 
+[Oh shit, git!](https://ohshitgit.com/)
+
