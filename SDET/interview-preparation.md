@@ -1,5 +1,7 @@
 # interview preparation
 
+## [SDET](https://www.youtube.com/user/pavanoltraining/playlists)
+
 ## [How To Explain Project In Interview Freshers and Experienced](https://www.youtube.com/watch?v=g9yhwT2ltpU&list=PLUDwpEzHYYLuu67U5EHcSBlsdR8FKtux_&index=2&t=0s)
 
 ### describe an important project you've worked on?
