@@ -17,3 +17,21 @@ Activity:
 3. sent resume to 上海宝腾电子科技 ID TECH
 
 4. edit chinese resume with project date
+
+## Jun-20 Thu
+
+Activity:
+
+1. sdet - interview preparation (in progress)
+2. selenium hybrid qutomation framework
+3. Java 8 group discussion
+
+## Jun-21 Fri
+
+Activity:
+
+1. sdet - interview preparation
+
+todo:
+
+1. send resume to Mcd
