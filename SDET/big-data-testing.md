@@ -1,3 +1,7 @@
+# [The Ultimate Hands-on Hadoop](https://learning.oreilly.com/videos/the-ultimate-hands-on/9781788478489)
+
+safarinicky01
+
 [Extract Transform Load](https://www.youtube.com/watch?v=K_FCHYWGGug)
 
 * data connectivity
@@ -86,3 +90,7 @@ Hadoop Distributed File System
 **Flume**: transform web logs to cluster
 
 **Kafka**: collect data from cluster of PCs or web servers and broadcase into hadoop
+
+
+
+https://learning.oreilly.com/videos/the-ultimate-hands-on/9781788478489/9781788478489-video1_1
