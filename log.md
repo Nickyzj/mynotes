@@ -35,3 +35,7 @@ Activity:
 todo:
 
 1. send resume to Mcd
+
+in progress:
+
+done:

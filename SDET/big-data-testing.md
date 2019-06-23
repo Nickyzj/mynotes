@@ -48,7 +48,7 @@ HDFS
   * horizontal scaling is linear
   * parallel processing
 
-![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/2019-06-23_172020.png?raw=true)
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-23%20at%2010.28.18%20PM.png?raw=true)
 
 Hadoop Distributed File System
 
@@ -94,3 +94,7 @@ Hadoop Distributed File System
 
 
 https://learning.oreilly.com/videos/the-ultimate-hands-on/9781788478489/9781788478489-video1_1
+
+https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html
+
+https://grouplens.org/datasets/movielens/ 
