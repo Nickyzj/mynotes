@@ -27,6 +27,8 @@ HDFS
 
 [What is OLAP?](https://www.youtube.com/watch?v=2ryG3Jy6eIY)
 
+## Ch1: learn all the buzzwords. and install hadoop
+
 [Hadoop Ecosystem Explained in 20 min](https://www.youtube.com/watch?v=DCaiZq3aBSc)
 
 - the hadoop ecosystem
@@ -98,3 +100,95 @@ https://learning.oreilly.com/videos/the-ultimate-hands-on/9781788478489/97817884
 https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html
 
 https://grouplens.org/datasets/movielens/ 
+
+## Ch2: using Hadoop's Core: HDFS and MapReduce
+
+### HDFS: What it is, and how it works
+
+* handles big files
+* by breaking them into blocks (128MB)
+  * distributed processing
+* stored across several commodity computers 
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%209.09.38%20AM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%209.11.18%20AM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%209.12.49%20AM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%209.16.39%20AM.png?raw=true)
+
+* namenode resilience
+  * back up metadata
+    * namenode writes to local disk and NFS
+  * secondary namenode
+    * maintains merged copy of edit log you can restore from
+  * HDFS federation
+    * each namenode manages a specific namespace volume
+  * HDFS high availability 
+    * hot standby namenode using shared edit log
+    * zookeeper tracks active namenode
+    * uses extreme measures to ensure only one namenode is used at a time
+
+* Using HDFS
+  * UI (Ambari)
+  * Command LIne Interface
+  * HTTP / HDFS Proxies
+  * Java interface
+  * NFS Gateway
+
+### install dataset into HDFS using command line
+
+```shell
+hadoop fs -ls
+hadoop fs -mkdir <dir name>
+hadoop fs -copyFromLocal <local file> <hdfs file path>
+hadoop fs -ls <hdfs file path>
+hadoop fs -rmdir <dir name>
+hadoop fs # List all command
+```
+
+### MapReduce: What it is, and how it works
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%205.48.43%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%205.50.42%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%205.51.55%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%205.52.37%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%205.53.35%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.09.14%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.11.36%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.13.02%20PM.png?raw=true)
+
+### How MapReduce distributes processing
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.14.55%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.18.46%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.22.35%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.23.59%20PM.png?raw=true)
+
+### MapReduce example: Break down movie ratings by rating score
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.28.36%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.31.08%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.34.04%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.35.29%20PM.png?raw=true)
+
+### [Activity] Installing Python, MRJob, and nano
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.38.57%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.45.57%20PM.png?raw=true)
+
