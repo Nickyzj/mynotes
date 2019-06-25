@@ -272,4 +272,95 @@ dump metadata # Output
 ![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%201.41.19%20PM.png?raw=true)
 
 * load -> reading, store -> writing
-* 
+
+### Diagnostics
+
+* DESCRIBE
+* EXPLAIN
+* ILLUSTRATE
+
+### UDF'S
+
+* REGISTER
+* DEFINE
+* IMPORT
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%205.27.19%20PM.png?raw=true)
+
+### [Exercise] Find the most-rated one-star movie
+
+Defining the problem
+
+* find all movies with an average rating less than 2.0
+* sort them by the total number of ratings
+
+Hint
+
+* new thing COUNT(). count up the number of items in a bag. Just like AVG
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%205.37.10%20PM.png?raw=true)
+
+## Ch4: Spark
+
+"A fast and general engine for large-scale data processing"
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.05.18%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.06.34%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.07.33%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.08.17%20PM.png?raw=true)
+
+resilient 弹性
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.09.02%20PM.png?raw=true)
+
+* Spark Streaming: input data in real time
+* MLLib: machine learning
+* GraphX: 
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.13.35%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.15.08%20PM.png?raw=true)
+
+### The Resilient Distributed Datasets(RDD)
+
+* Resilient
+* Distributed
+* Dataset
+
+### The sparkContext
+
+* created by your driver program
+* is responsible for making RDD's resilient and distributed
+* creates RDD's
+* the spark shell creates a "sc" object for you
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.18.06%20PM.png?raw=true)
+
+### Transforming RDD's
+
+* map
+* flatmap
+* filter
+* distinct
+* sample
+* union, intersection, subtract, cartesian
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.24.25%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.26.39%20PM.png?raw=true)
+
+### RDD actions
+
+* collect
+* count
+* countByValue
+* take
+* top
+* reduce
+* ...
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.29.19%20PM.png?raw=true)
+
