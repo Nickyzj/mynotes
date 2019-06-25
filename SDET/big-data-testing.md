@@ -192,3 +192,84 @@ hadoop fs # List all command
 
 ![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-24%20at%206.45.57%20PM.png?raw=true)
 
+### [Exercise] Rank Movies by their popularity
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2010.20.03%20AM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2010.22.14%20AM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2010.24.39%20AM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2010.25.37%20AM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2010.28.02%20AM.png?raw=true)
+
+### [Activity] Check your results
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2010.35.24%20AM.png?raw=true)
+
+**shuffle and sort stage in mapper. will sort by key automatically.**
+
+## Ch3: Programming Hadoop with Pig
+
+```shell
+su root
+ambari-admin-password-reset
+```
+
+### Introducing Pig
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2012.38.26%20PM.png?raw=true)
+
+MapReduce: mapper, reducer - mapper, reducer… linear way
+
+TEZ: much faster
+
+### Running Pig
+
+* Grunt
+* Script
+* Ambari / Hue
+
+### An example
+
+* find the oldest 5-start movies
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2012.44.23%20PM.png?raw=true)
+
+name it (schema) when load
+
+4 elements tuple.
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2012.47.20%20PM.png?raw=true)
+
+dump metadata # Output
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2012.53.00%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2012.55.30%20PM.png?raw=true)
+
+- create bag in pig
+- contains tuples of all individuals of rows
+- associated with given movie id
+- similiar to a reducer
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%2012.57.22%20PM.png?raw=true)
+
+* generate -> generate new rows
+* AVG go through everything in bag
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%201.03.53%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%201.05.02%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%201.06.54%20PM.png?raw=true)
+
+ ![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%201.09.00%20PM.png?raw=true)
+
+### more Pig Latin
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%201.41.19%20PM.png?raw=true)
+
+* load -> reading, store -> writing
+* 
