@@ -364,3 +364,19 @@ resilient 弹性
 
 ![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%206.29.19%20PM.png?raw=true)
 
+### [Activity] Find the movie with the lowest average rating - with RDD's
+
+### Datasets and Spark 2.0
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%209.27.33%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%209.30.06%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%209.31.39%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%209.33.16%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%209.34.11%20PM.png?raw=truehttps://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%209.34.38%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%209.34.38%20PM.png?raw=true)
+
