@@ -743,3 +743,286 @@ exit
 
 ![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%205.08.32%20PM.png?raw=true)
 
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%209.33.59%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%209.36.54%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%209.38.41%20PM.png?raw=true)
+
+#### Install MongoDB, and integrate Spark with MongoDB
+
+```shell
+maria_dev
+su root
+cd /var/lib/ambari-server/resources/stacks
+cd HDP
+cd 2.5
+cd services
+git clone https://github.com/nikunjness/mongo-ambari.git
+sudo service ambari restart
+```
+
+* amber -> Actions -> add services -> mongoDB -> next… -> deploy
+
+```shell
+pip install pymongo
+```
+
+```shell
+wget http://media.sundog-soft.com/hadoop/MongoSpark.py
+```
+
+```python
+from pyspark.sql import SparkSession
+from pyspark.sql import Row
+from pyspark.sql import functions
+
+def parseInput(line):
+    fields = line.split('|')
+    return Row(user_id = int(fields[0]), age = int(fields[1]), gender = fields[2], occupation = fields[3], zip = fields[4])
+
+if __name__ == "__main__":
+    # Create a SparkSession
+    spark = SparkSession.builder.appName("MongoDBIntegration").getOrCreate()
+
+    # Get the raw data
+    lines = spark.sparkContext.textFile("hdfs:///user/maria_dev/ml-100k/u.user")
+    # Convert it to a RDD of Row objects with (userID, age, gender, occupation, zip)
+    users = lines.map(parseInput)
+    # Convert that to a DataFrame
+    usersDataset = spark.createDataFrame(users)
+
+    # Write it into MongoDB
+    usersDataset.write\
+        .format("com.mongodb.spark.sql.DefaultSource")\
+        .option("uri","mongodb://127.0.0.1/movielens.users")\
+        .mode('append')\
+        .save()
+
+    # Read it back from MongoDB into a new Dataframe
+    readUsers = spark.read\
+    .format("com.mongodb.spark.sql.DefaultSource")\
+    .option("uri","mongodb://127.0.0.1/movielens.users")\
+    .load()
+
+    readUsers.createOrReplaceTempView("users")
+
+    sqlDF = spark.sql("SELECT * FROM users WHERE age < 20")
+    sqlDF.show()
+
+    # Stop the session
+    spark.stop()
+```
+
+```shell
+export SPARK_MAJOR_VERSION=2
+SPARK-SUBMIT --packages org.mongodb.spark:mongo-spark-connector_2.11:2.0.0 MongoSpark.py
+```
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%209.59.46%20PM.png?raw=true)
+
+```shell
+mongo
+use movelens
+db.users.find( {user_id: 100})
+db.user.explain().find( {user_id: 100}) # explain
+
+# create index
+db.user.createIndex( {user_id: 1}) # 1 ascending
+# index scan now
+
+db.users.aggregate( [
+	{ $group: { _id: {occupation: "$occupation"}, avgAge: {$avg: "$age"}}}
+])
+```
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.07.58%20PM.png?raw=true)
+
+```shell
+db.users.count()
+db.getCollectionInfos()
+db.user.drop()
+```
+
+### Choosing a database
+
+* integration considerations
+* scaling requirements
+* support considerations
+* Budget
+* CAP considerations 
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.17.16%20PM.png?raw=true)
+
+* simplicity
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.19.09%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.20.28%20PM.png?raw=true)
+
+None of above. Just use Hadoop file system and tools available
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.22.36%20PM.png?raw=true)
+
+cassandra
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.28.01%20PM.png?raw=true)
+
+## CH7: Query your data interactively
+
+Query Engines:
+
+* Dirll -> mongoDB
+* Hue
+* Phoenix
+* presto -> cassandra
+* zeppelin
+
+### Drill
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.35.57%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.37.01%20PM.png?raw=true)
+
+connect to TableU
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.38.28%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.40.07%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.40.46%20PM.png?raw=true)
+
+### Setting up Drill
+
+* amber -> login admin -> start MongoDB
+* Hive view 
+
+```sql
+CREATE DATABASE movielens;
+```
+
+* upload table -> u.data -> movielens table
+
+```shell
+maria_dev
+su root
+export SPARK_MAJOR_VERSION=2
+spark-submit --packages org.mongodb.spark:mongo-spark-connector_2.11:2.0.0 MongoSpark.py
+
+# Install Drill
+# drill.apache.org
+wget <link>/apache-drill-1.9.0.tar.gz
+tar -xvf apache-drill...
+cd apache-dirll...
+bin/drillbit.sh start -Ddrill.exec.http.port=8765 # startup drill
+# 127.0.0.1:8765
+```
+
+* Storage -> update Hive -> change hive.metastore.uris
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2010.54.09%20PM.png?raw=true)
+
+```sql
+show databases;
+select * from hive.movielens.ratings limit 10; # from Hive
+select * from mongo.movielens.users limit 10; # from mongoDB
+
+# combined
+select u.occupation, count(*) 
+from hive.movielens.ratings r 
+join mongo.movielens.users u 
+on r.user_id = u.user_id 
+group by u.occupation;
+```
+
+```shell
+bin/drillbit.sh stop
+```
+
+* ambari -> stop mongoDB
+
+### Phoenix
+
+sql for HBase
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2011.03.38%20PM.png?raw=true)
+
+#### why phoenix
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2011.06.27%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2011.11.05%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%2011.11.52%20PM.png?raw=true)
+
+#### install phoenix and query HBase
+
+* amber -> start HBase
+
+```shell
+maria_dev
+su root
+yum install phoenix
+cd /usr/hdp/current/phoenix-client
+cd bin
+python sqlline.py
+
+!tables; # system tables
+
+create table if not exists us_population (
+state CHAR(2) Not NULL,
+city varchar not null,
+population bigint
+contraint my_pk primary key (state, city));
+
+!tables # table created
+
+# cannot insert!
+upsert into us_population values ('NY', 'New Your', 823425);
+upsert into us_population values ('CA', 'Los Angeles', 8234232342325);
+
+select * from us_population;
+select * from us_population where state='CA';
+
+drop table us_population;
+
+!quit
+```
+
+#### integrate phoenix with pig
+
+```shell
+python sqlline.py
+create table users( userid integer not null, age integer, gender char(1), occupation varchar, zip varchar constraint pk primary key (userid));
+!tables
+!quit
+
+cd /home/maria_dev
+wget http://media.sundog-soft.com/hadoop/ml-100k/u.user
+cd ..
+wget http://media.sundog-soft.com/hadoop/phoenix.pig
+```
+
+```pig
+REGISTER /usr/hdp/current/phoenix-client/phoenix-client.jar
+
+users = LOAD '/user/maria_dev/ml-100k/u.user' 
+USING PigStorage('|') 
+AS (USERID:int, AGE:int, GENDER:chararray, OCCUPATION:chararray, ZIP:chararray);
+
+STORE users into 'hbase://users' using
+    org.apache.phoenix.pig.PhoenixHBaseStorage('localhost','-batchSize 5000');
+
+# table, userid and occupation column
+occupations = load 'hbase://table/users/USERID,OCCUPATION' using org.apache.phoenix.pig.PhoenixHBaseLoader('localhost');
+
+grpd = GROUP occupations BY OCCUPATION; 
+cnt = FOREACH grpd GENERATE group AS OCCUPATION,COUNT(occupations);
+DUMP cnt;  
+
+```
+
+```shell
+pig phoenix.pig
+```
+
