@@ -380,3 +380,366 @@ resilient 弹性
 
 ![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-25%20at%209.34.38%20PM.png?raw=true)
 
+## CH5: Relational Data stores with Hadoop
+
+### HIVE
+
+- Distributing SQL queries with Hadoop
+- Translates SQL queries to MapReduce or Tez jobs on your cluster
+- HiveQL
+- Easy OLAP queries
+- Highly extensible
+  - User defined functions
+  - Thrift server
+  - JDBC/ODBC driver
+
+Why not Hive?
+
+* High latency - not appropriate for OLTP
+* Stores data de-normalized
+* SQL is limited in what it can do
+  * Pig, Spack allows more complex stuff
+* No transactions
+* No record-level updates, inserts, deletes
+
+HiveQL
+
+* MySQL with some extensions
+* views
+* allows to specify how structured data is stored and partitioned
+
+### [Activity] Use Hive to find the most popular movie
+
+* Ambari -> Hive view -> upload data file
+
+```sql
+CREATE VIEW topMovieIDs IF NOT EXISTS AS
+SELECT moveID, count(movieID) as ratingCount
+FROM ratings
+GROUP BY movieID
+ORDER BY ratingCount DESC;
+
+SELECT n.title, ratingCount
+FROM topMoviesIDs t JOIN names n ON t.movieID = n.movieID;
+
+DROP VIEW topMovieIDs;
+```
+
+### How Hive Works
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.28.00%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.32.10%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.41.18%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.43.18%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.46.00%20PM.png?raw=true)
+
+```sql
+CREATE VIEW IF NOT EXISTS avgRatings AS
+SELECT moveID, AVG(rating) as avgRating, COUNT(movieID) as ratingCount
+FROM ratings
+FROUP BY movieID
+ORDER BY avgRating DESC;
+
+SELECT n.title, avgRating
+FROM avgRating t JOIN name n ON t.movieID = n.movieID
+WHERE ratingCount > 10;
+```
+
+### Integrating MySQL with Hadoop
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.51.21%20PM.png?raw=true)
+
+#### sqoop
+
+* sqoop can candle big data
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.52.44%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.53.52%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.55.52%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.56.30%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.57.14%20PM.png?raw=true)
+
+* -m 1 means one mapper
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%201.59.13%20PM.png?raw=true)
+
+```sql
+mysql -u root -p hadoop
+create database movielens;
+show databases;
+exit
+
+wget http://media.sundog-soft.com/hadoop/movielens.sql
+
+mysql -u root -p hadoop
+SET NAMES 'utf8';
+SET CHARACTER SET utf8;
+
+use movelens;
+source movielens.sql;
+show tables;
+
+select * from movies limit 10;
+
+describe ratings;
+
+select movies.title, count(ratings.movie_id) as ratingCount
+from movies
+inner join ratings
+on movies.id = ratings.movie_id
+group by movies.title
+order by ratingCount;
+```
+
+### [Activity] Use Sqoop to import data from MySQL to HFDS/Hive
+
+```sql
+mysql -u root -p hadoop
+grant all privileges on movielens.* to ''@'localhost';
+```
+
+```shell
+sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --table movies -m 1
+```
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%202.13.05%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%202.13.29%20PM.png?raw=true)
+
+```shell
+sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --table movies -m 1 --hive-import
+```
+
+### [Activity] Use Sqoop to export data from Hadoop to MySQL
+
+```sql
+mysql -u root -p hadoop
+use movielens;
+create table exported_movies (id integer, title varchar(255), releaseDate DATE);
+exit;
+
+sqoop export --connect jdbc:mysql://localhost/movielens -m 1 --dirver com.mysql.jdbc.Driver --table exported_movies --export-dir /apps/hive/warehouse/movies --input-fields-terminated-by '\0001'
+
+mysql -u root -p hadoop
+use movielens;
+select * from exported_movies limit 10;
+```
+
+## CH6: non-relational data stores
+
+### HBase
+
+* Built on HDFS
+
+* Create, Read, Update, Delete. 
+* No query language
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%203.06.07%20PM.png?raw=true)
+
+* region server. Ranges of keys. partitioning.
+* app talks to region server.
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%203.10.23%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%203.12.59%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%203.17.07%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%203.40.41%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%203.42.35%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%203.45.04%20PM.png?raw=true)
+
+```shell
+maria_dev
+su root
+/usr/hdp/current/hbase-master/bin/hbase-daemon.sh start rest -p 8888 --infoport 8001
+```
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%203.49.40%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%203.54.56%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%203.55.50%20PM.png?raw=true)
+
+```shell
+/usr/hdp/current/hbase-master/bin/hbase-daemon.sh stop rest
+```
+
+### [Activity] Use HBase with Pig to import data at scale
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%203.57.52%20PM.png?raw=true)
+
+```shell
+root
+hbase shell
+list
+create 'users', 'userinfo'
+list
+exit
+
+wget http://media.sundog-soft.com/hadoop/hbase.pig
+
+```
+
+```shell
+users = LOAD '/user/maria_dev/ml-100k/u.user' 
+USING PigStorage('|') 
+AS (userID:int, age:int, gender:chararray, occupation:chararray, zip:int);
+
+STORE users INTO 'hbase://users' 
+USING org.apache.pig.backend.hadoop.hbase.HBaseStorage (
+'userinfo:age,userinfo:gender,userinfo:occupation,userinfo:zip');
+```
+
+```shell
+pig hbase.pig
+```
+
+```shell
+hbase shell
+list
+scan 'users'
+disable 'users'
+drop 'users'
+exit
+```
+
+### Cassandra
+
+* distributed non-relational database
+* no master node
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%204.16.12%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%204.19.14%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%204.22.09%20PM.png?raw=true)
+
+#### Cassandra architecture
+
+* ring architecture
+* gossip protocol
+* each node is same function
+* read, n of N nodes consistent
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%204.27.57%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%204.29.24%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%204.32.20%20PM.png?raw=true)
+
+#### Installing Cassandra
+
+```shell
+maria_dev
+su root
+python -V # horton need python 2.6
+yum update
+yum install scl-utils
+yum install centos-release-scl-rh
+yum install python27
+scl enable python27 base
+python -V # 2.7
+cd /etc/yum.repos.d
+vi datastax.repo
+[datastax]
+name = DataStax Repo for Apache Cassandra
+baseurl = http://rpm.datastax.com/community
+enabled = 1
+gpgcheck = 0
+
+yum install dsc30
+pip install cqlsh
+service cassandra start
+cqlsh --cqlversion="3.4.0"
+CREATE KEYSPACE movielens WITH replication = {'class': 'SimpleStrategy', 'replicateion_factor':'1'} AND durable-writes = true;
+USE movielens;
+CREATE TABLE users (user_id int, age int, gender text, occupation text, zip text, PRIMARY KEY (user_id));
+DESCRIBE TABLE users;
+SELECT * FROM  users;
+```
+
+```shell
+wget http://media.sundog-soft.com/hadoop/CassandraSpark.py
+export SPARK_MAJOR_VERSION=2
+```
+
+```python
+from pyspark.sql import SparkSession
+from pyspark.sql import Row
+from pyspark.sql import functions
+
+def parseInput(line):
+    fields = line.split('|')
+    return Row(user_id = int(fields[0]), age = int(fields[1]), gender = fields[2], occupation = fields[3], zip = fields[4])
+
+if __name__ == "__main__":
+    # Create a SparkSession
+    spark = SparkSession.builder.appName("CassandraIntegration").config("spark.cassandra.connection.host", "127.0.0.1").getOrCreate()
+
+    # Get the raw data
+    lines = spark.sparkContext.textFile("hdfs:///user/maria_dev/ml-100k/u.user")
+    # Convert it to a RDD of Row objects with (userID, age, gender, occupation, zip)
+    users = lines.map(parseInput)
+    # Convert that to a DataFrame
+    usersDataset = spark.createDataFrame(users)
+
+    # Write it into Cassandra
+    usersDataset.write\
+        .format("org.apache.spark.sql.cassandra")\
+        .mode('append')\
+        .options(table="users", keyspace="movielens")\
+        .save()
+
+    # Read it back from Cassandra into a new Dataframe
+    readUsers = spark.read\
+    .format("org.apache.spark.sql.cassandra")\
+    .options(table="users", keyspace="movielens")\
+    .load()
+
+    readUsers.createOrReplaceTempView("users")
+
+    sqlDF = spark.sql("SELECT * FROM users WHERE age < 20")
+    sqlDF.show()
+
+    # Stop the session
+    spark.stop()
+```
+
+```shell
+spark-submit --packages datastax:spark-cassandra-connector:2.0.0-M2-s_2.11 CassandraSpark.py
+
+cqlsh --cqlversion="3.4.0"
+use movielens;
+select * from users limit 10;
+exit
+```
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%204.59.15%20PM.png?raw=true)
+
+### MongoDB
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%205.01.45%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%205.03.10%20PM.png?raw=true)
+
+#### MongoDB terminology
+
+* Databases
+* Collections
+* Documents
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%205.05.50%20PM.png?raw=true)
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-26%20at%205.08.32%20PM.png?raw=true)
+
