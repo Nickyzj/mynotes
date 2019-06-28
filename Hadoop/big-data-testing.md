@@ -137,3 +137,11 @@ sort -r >sample.txt # descending
 chmod u-w g-w o-r sample.txt
 ```
 
+### Run MapReduce jar file
+
+```shell
+hadoop jar wordcount.jar WordCount /wordcountinput/wordcount.txt /wordcountoutput
+```
+
+![](https://github.com/Nickyzj/mynotes/blob/master/screenshots/Screen%20Shot%202019-06-27%20at%209.32.58%20PM.png?raw=true)
+
