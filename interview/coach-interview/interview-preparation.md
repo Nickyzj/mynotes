@@ -10,11 +10,12 @@
 * i have experience on team management (size of 5).
 * management style:
   * result-oriented
+  * firm but fair
   * reachable, supportive
   * set expectation, appraisal regularly
 * my strength:
   * solid technical knowledge
-  * love to communicate
+  * communicator and listener
   * say doer
 * why not promoted to manager
   * as the nature of off-shore center, our objective is to fulfill the projects needs from us
