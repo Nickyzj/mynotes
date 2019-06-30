@@ -20,7 +20,7 @@
 
 
 
-·       Supervise and guide inspectors, technicians and other staff including offshore
+·       **Supervise and guide** inspectors, technicians and other staff including offshore
 
 ·       Evaluate the current Asia system and be responsible for **becoming gate keeper of quality** while continue maintaining the current services for Cross brand Asia systems especially when **implementing new systems/functional changes/architecture changes**
 
@@ -108,4 +108,4 @@ o   Multi-region/country POS Test/Support experience is a strong plus
 
 ·       Asia stores include Japan, China, Hong Kong/Macau, Taiwan, Korea, Singapore, Malaysia and Australia
 
-·       Multi-brand system projects and support in Japan, Asia, and in Europe - approx. 700 stores
+·       Multi-brand system projects and support in Japan, Asia, and in Europe - approx. 700 stores 

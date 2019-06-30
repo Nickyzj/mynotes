@@ -1,5 +1,25 @@
 # Coach
 
+## tell me about yourself
+
+* i have been worked in software testing for quite a few years
+* i have broad experience on testing projects for various types of applications throughout these years
+* manual test, automation test, performance test, test development
+* i worked in global organization for years
+* i worked as vender (HP outsourcing), with my own team for internal projects, with vendors (India contractors)
+* i have experience on team management (size of 5).
+* management style:
+  * result-oriented
+  * reachable, supportive
+  * set expectation, appraisal regularly
+* my strength:
+  * solid technical knowledge
+  * love to communicate
+  * say doer
+* why not promoted to manager
+  * as the nature of off-shore center, our objective is to fulfill the projects needs from us
+  * limitation of team size
+
 ## Describe an important project you've worked on
 
 ### Build automation framework from 0 - 1
