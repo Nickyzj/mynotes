@@ -2,13 +2,14 @@
 
 ## tell me about yourself
 
-* i have been worked in software testing for quite a few years
-* i have broad experience on testing projects for various types of applications throughout these years
+* i have been **worked in software testing** for quite a few years
+* i have **broad experience** on testing projects for various types of applications throughout these years
 * manual test, automation test, performance test, test development
-* i worked in global organization for years
-* i worked as vender (HP outsourcing), with my own team for internal projects, with vendors (India contractors)
+* **good relationship** with dev teams
+* i worked in **global organization** for years
+* i worked as **vender** (HP outsourcing), with my own team for internal projects, with vendors (India contractors)
 * i have experience on team management (size of 5).
-* management style:
+* **management style**:
   * result-oriented
   * firm but fair
   * reachable, supportive
@@ -139,4 +140,8 @@ Get rid of VMs.
 VMs
 
 ### BW Chain monitor system
+
+### most challenge project
+
+evolve
 
