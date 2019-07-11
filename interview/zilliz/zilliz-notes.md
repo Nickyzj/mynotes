@@ -1,3 +1,5 @@
+https://www.bilibili.com/video/av37256591/?p=20
+
 ## AVL Trees
 
 ### what is a binary search tree
