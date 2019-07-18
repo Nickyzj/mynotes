@@ -91,13 +91,25 @@
 
 ### SAML 接口测试
 
+背景
+
+* single single on 系统
+* 测试公司内所有系统正确接入
+
+难点
+
+* 请求响应错误，没有明确信息。
+* 逐个请求抓包，分析内容，调试
+
+流程
+
 * 打开目标系统 url
 * 返回403 -》转入微软登录界面
 * 输入帐号密码
 *  saml 请求转入公司身份验证
-* 验证通过，返回 saml 响应至微软
-* 微软返回成功登录至客户端
-* header 中加入 token，后面所有请求都要包含 token
+* 验证通过，生成密钥，返回 saml 响应至微软
+* 微软返回成功，header 中加入 token 登录至客户端
+* 后续请求中header 中加入 token，后面所有请求都要包含 token
 
 难点
 
@@ -108,7 +120,6 @@
 * 脚本 fiddler 抓包，转换 loadrunner
 * 参数复杂xml，json
 * python 抓 batch result
-* 加密解密 node.js
 
 
 
