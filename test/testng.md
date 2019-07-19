@@ -134,3 +134,41 @@ testng.xml paramters
 
 ## Dataprovider
 
+```java
+@Test(dataProvider = "getData")
+public void pageTest(String firstName, String address) {
+	  
+}
+
+@DataProvider
+getData() {
+  ArrayList<Object[]> testData = TestUtil.getDataFromExcel();
+  return testData.iterator();
+}
+
+import com.excel.utility.Xls_Reader;
+
+public class TestUtil {
+  
+  static Xls_reader reader;
+  
+  public static ArrayList<Object[]> getDataFromExcel() {
+    
+    ArrayList<Object[]> myData = new ArrayList<Object[]>();
+    try{
+      reader = new Xls_Reader("/src/main/..../testdata.xlsx");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    for (int rowCnt = 2; rowCnt <= reader.getRowCount("<sheetname>"); rowCnt++) {
+      String firstName = reader.getCellData("<sheetname>", "firstname", rowCnt);
+      String crk = reader.getCellData("PRScrs", "crk", rowCnt);
+        ...
+      Object obj = {firstnamt, crk,...});
+    	myData.add(obj);
+    }
+    return myData;
+  }
+}
+```
+
