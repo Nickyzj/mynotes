@@ -2,13 +2,13 @@ https://www.howtoing.com/how-to-install-and-configure-zabbix-to-securely-monitor
 
 
 
-How to install Zabbix Agent 4.2 ? Ubuntu, RHEL, CentOS
+### How to install Zabbix Agent 4.2 ? Ubuntu, RHEL, CentOS
 
 https://zabbixonly.com/how-to-install-zabbix-agent-4-2-ubuntu-rhel-centos/
 
 
 
-grafana
+### grafana
 
 ```
 /Users/jizheng/Documents/tools
@@ -28,7 +28,7 @@ admin/admin
 
 
 
-CentOS7查看和关闭防火墙
+### CentOS7查看和关闭防火墙
 
 https://blog.csdn.net/ytangdigl/article/details/79796961
 
@@ -52,7 +52,7 @@ Admin/zabbix
 
 
 
-mac agent
+### mac agent
 
 ```
 
@@ -67,7 +67,7 @@ http://blog.oper-init.eu/2016/07/05/install-zabbix-agent-on-mac-osx/
 
 
 
-centos
+### centos
 
 ```
 /etc/zabbix/zabbix_agentd.conf
@@ -86,7 +86,7 @@ sudo systemctl start zabbix-agent
 
 
 
-mysql
+### mysql
 
 ```
 grant usage on *.* to zabbix@127.0.0.1 identified by '123456';
@@ -116,7 +116,7 @@ UserParameter=mysql.version,/usr/bin/mysql -V
 
 
 
-centos mysql
+### centos mysql
 
 ```
 yum install -y mariadb-server
@@ -153,3 +153,129 @@ GRANT ALL ON *.* TO 'myuser'@'%';
 flush privileges;
 ```
 
+
+
+steps for centos intall zabbix
+
+https://www.zabbix.com/documentation/4.0/zh/manual/installation/install_from_packages/rhel_centos
+
+https://tecadmin.net/install-zabbix-agent-on-centos-rhel/
+
+
+
+[https://www.centos.bz/2018/04/zabbix-%E7%9B%91%E6%8E%A7-nginx-status-%E6%80%A7%E8%83%BD-2/](https://www.centos.bz/2018/04/zabbix-监控-nginx-status-性能-2/)
+
+http://ubuntu-server/basic_status
+
+
+
+```
+
+systemctl start httpd
+
+http://centos-server/zabbix/
+
+/etc/zabbix/scripts/nginx.sh
+
+sudo vi /etc/nginx/nginx.conf
+
+sudo systemctl restart zabbix-agent
+
+sudo nginx -s reload
+```
+
+
+
+### tomcat install
+
+https://www.vultr.com/docs/how-to-install-apache-tomcat-8-on-centos-7
+
+```
+yum install -y zabbix-java-gateway
+
+vim /etc/zabbix/zabbix_java_gateway.conf
+
+systemctl start zabbix-java-gateway.service
+
+vim /etc/zabbix/zabbix_server.conf
+
+vi /opt/tomcat/bin/setenv.sh
+
+netstat -anlp | grep 9000
+```
+
+https://www.cnblogs.com/ssgeek/p/9299273.html
+
+https://geekflare.com/enable-jmx-tomcat-to-monitor-administer/
+
+```
+CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=192.168.15.74"
+
+CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=10.0.0.20"
+```
+
+```
+java -jar cmdline-jmxclient-0.10.3.jar - centos-server2:9000 java.lang:type=Memory NonHeapMemoryUsage
+```
+
+https://my.oschina.net/u/2338224/blog/1793153
+
+
+
+```
+JMeterPluginsCMD.sh --generate-png perfmon_result_cpu.png --input-jtl perfmon_result_cpu.jtl --plugin-type PerfMon --width 800 --height 600
+JMeterPluginsCMD.sh --generate-png perfmon_result_memory.png --input-jtl perfmon_result_memory.jtl --plugin-type PerfMon --width 800 --height 600
+JMeterPluginsCMD.sh --generate-png perfmon_result_network.png --input-jtl perfmon_result_network.jtl --plugin-type PerfMon --width 800 --height 600
+```
+
+### jmeter perfmon agent
+
+```
+/home/root/ServerAgent
+./startAgent.sh
+```
+
+jmeter guide
+
+https://octoperf.com/blog/2017/10/19/how-to-analyze-jmeter-results/
+
+
+
+### 启动 zabbix server
+
+```
+systemctl start httpd
+systemctl start zabbix-server
+systemctl start zabbix-agent
+systemctl start zabbix-java-gateway
+ntpdate us.pool.ntp.org
+
+```
+
+zabbix-java-gateway
+
+https://jaminzhang.github.io/monitoring/Zabbix-config-JMX/
+
+```
+vi /etc/zabbix/zabbix_java_gateway.conf
+```
+
+### run jmeter test
+
+```
+jmeter -n -t tomcat.jmx -l test_result/hpbook_tomcat_10user_1 -e -o test_result/hpbook_tomcat_10user_report_1
+
+jmeter -n -t tomcat.jmx -l test_result/hpbook_tomcat_60user_1 -e -o test_result/hpbook_tomcat_60user_report_1 -Jtest_name=hpbook_tomcat_60user -Jusers=60 -Jramp_up=120
+```
+
+https://www.cnblogs.com/dreamanddead/p/why-should-you-set-hostname-in-jmeter-distribute-test.html
+
+system.properties最后一行添加，
+
+```
+java.rmi.server.hostname=192.168.1.4
+```
+
+jmeter 坑
+
+https://testerhome.com/topics/10950
