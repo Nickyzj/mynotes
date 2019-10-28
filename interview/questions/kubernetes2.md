@@ -179,3 +179,19 @@ To start using your cluster, you need to run the following as a regular user:
 kubeadm join 10.0.0.30:6443 --token 1mk8bx.u4xr8etbx58eyers --discovery-token-ca-cert-hash sha256:2c6750cb1b254fb60195b49e210e0c2494a2e4b4c58e1b1eed94c8b02217763e --ignore-preflight-errors=Swap
 ```
 
+```
+NAME                               READY     STATUS    RESTARTS   AGE       IP           NODE
+coredns-78fcdf6894-n6gd2           1/1       Running   0          1d        10.244.0.3   k-master
+coredns-78fcdf6894-tzlrf           1/1       Running   0          1d        10.244.0.2   k-master
+etcd-k-master                      1/1       Running   0          1d        10.0.0.30    k-master
+kube-apiserver-k-master            1/1       Running   0          1d        10.0.0.30    k-master
+kube-controller-manager-k-master   1/1       Running   0          1d        10.0.0.30    k-master
+kube-flannel-ds-amd64-fj2cc        1/1       Running   0          1d        10.0.0.30    k-master
+kube-flannel-ds-amd64-gw7jb        1/1       Running   0          1d        10.0.0.32    k-node02
+kube-flannel-ds-amd64-s62km        1/1       Running   0          1d        10.0.0.31    k-node01
+kube-proxy-mzdl7                   1/1       Running   0          1d        10.0.0.30    k-master
+kube-proxy-pmm5x                   1/1       Running   0          1d        10.0.0.31    k-node01
+kube-proxy-txjrf                   1/1       Running   0          1d        10.0.0.32    k-node02
+kube-scheduler-k-master            1/1       Running   0          1d        10.0.0.30    k-master
+```
+
