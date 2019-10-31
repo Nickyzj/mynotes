@@ -176,7 +176,7 @@ To start using your cluster, you need to run the following as a regular user:
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
   
-kubeadm join 10.0.0.30:6443 --token 1mk8bx.u4xr8etbx58eyers --discovery-token-ca-cert-hash sha256:2c6750cb1b254fb60195b49e210e0c2494a2e4b4c58e1b1eed94c8b02217763e --ignore-preflight-errors=Swap
+kubeadm join 10.0.0.30:6443 --token wab26a.0rpbub3k1mehw6lc --discovery-token-ca-cert-hash sha256:2c6750cb1b254fb60195b49e210e0c2494a2e4b4c58e1b1eed94c8b02217763e --ignore-preflight-errors=Swap
 ```
 
 ```
@@ -195,3 +195,21 @@ kube-proxy-txjrf                   1/1       Running   0          1d        10.0
 kube-scheduler-k-master            1/1       Running   0          1d        10.0.0.30    k-master
 ```
 
+https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+
+nickyzj83
+
+wodemima11
+
+```
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://gvoc8wgu.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+http://k-master:32441/grid/console
